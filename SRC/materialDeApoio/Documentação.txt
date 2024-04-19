@@ -1,0 +1,4 @@
+Documentações
+
+- Canvas
+https://developer.mozilla.org/pt-BR/docs/Web/API/Canvas_API

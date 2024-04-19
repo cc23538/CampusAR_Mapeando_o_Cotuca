@@ -1,0 +1,9 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Isso ocultará as barras de rolagem, se houver */
+}
+
+canvas {
+    display: block; /* Isso garante que o canvas se ajuste corretamente */
+}
