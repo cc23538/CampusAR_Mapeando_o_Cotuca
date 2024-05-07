@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personagem Andando com Canvas</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="400" height="400"></canvas>
+  <script>
+    // Obtendo o contexto 2D do Canvas
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Criando um objeto de imagem para a sprite sheet
+    const spriteSheet = new Image();
+    spriteSheet.src = './SRC/IMG/sprite_sheet_player.png'; // Coloque o caminho para a sua sprite sheet aqui
+
+    // Definindo as coordenadas do personagem
+    let x = canvas.width / 2;
+    let y = canvas.height / 2;
+
+    // Função para desenhar a sprite
+    function drawSprite() {
+      // Desenha o quadro de animação da sprite sheet
+      ctx.drawImage(
+        spriteSheet,
+        /* Coordenadas do quadro de animação na sprite sheet */
+        /* Posição X, Posição Y, Largura, Altura */
+        0, 0, 35, 35, // Exemplo: desenha o primeiro quadro da sprite sheet
+        /* Posição onde a sprite será desenhada no Canvas */
+        x, y, 150, 150 // Exemplo: desenha a sprite no centro do canvas com tamanho 50x50
+      );
+    }
+
+    // Função de loop do jogo
+    function gameLoop() {
+      drawSprite();
+      requestAnimationFrame(gameLoop);
+    }
+
+    // Iniciar o loop do jogo
+    gameLoop();
+  </script>
+</body>
+</html>
