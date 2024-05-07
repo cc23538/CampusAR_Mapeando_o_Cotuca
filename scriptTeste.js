@@ -38,6 +38,7 @@ function resizeCanvas() {
     addImage('/SRC/IMG/RA-teste.png', 100,100, 500, 500);
 }
 
+
 // Chama a função de redimensionamento inicialmente
 resizeCanvas();
 
