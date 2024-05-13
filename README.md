@@ -4,3 +4,5 @@ Trello: https://trello.com/b/WzRC70Bf/tcc<br><br>
 ![](https://img.freepik.com/vetores-premium/predio-da-escola-de-pixel-art-de-8-bits_317396-1736.jpg)
 
  ![Snake animation](https://github.com/cc23538/CampusAR_Mapeando_o_Cotuca/blob/output/github-contribution-grid-snake.svg)
+
+ ![Snake animation](github-contribution-grid-snake.svg)
