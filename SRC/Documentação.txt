@@ -6,3 +6,5 @@ https://developer.mozilla.org/pt-BR/docs/Web/API/Canvas_API
 - Sprite sheet
 https://craftpix.net/freebies/free-level-map-pixel-art-assets-pack/
 
+- Scroll back: A teoria e a prática das câmeras em Side-Scrollers
+https://docs.google.com/document/d/1iNSQIyNpVGHeak6isbP6AHdHD50gs8MNXF1GCf08efg/pub
