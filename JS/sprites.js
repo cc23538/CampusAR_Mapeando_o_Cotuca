@@ -191,7 +191,7 @@ const player = new Fighter({
         x:0,
         y:10
     },
-    scale: 2.5,
+    scale: 1.0, //tamanho do personagem
     sprites: {
         idle:{
             src:"Idle.png",
