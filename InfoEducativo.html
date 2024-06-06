@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Balões com Textos Flutuantes</title>
+<style>
+    canvas {
+        display: block;
+        margin: auto;
+        border: 1px solid black;
+    }
+</style>
+</head>
+<body>
+<canvas id="myCanvas"></canvas>
+<script>
+    // Obtém o elemento canvas
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext('2d');
+
+    // Ajusta o tamanho do canvas com base no tamanho da janela
+    canvas.width = window.innerWidth * 0.8; // 80% da largura da janela
+    canvas.height = window.innerHeight * 0.6; // 60% da altura da janela
+
+    // Define as propriedades da animação
+    var amplitude = 10; // amplitude do movimento de flutuação
+    var frequency = 0.004; // frequência do movimento de flutuação
+
+    // Define os balões
+    var balloons = [
+        {
+            x: canvas.width * 0.1,
+            y: canvas.height * 0.1,
+            width: 300,
+            height: 200,
+            text: 'O COTUCA foi fundado em 1967 e tem uma história rica e significativa na educação técnica da região de Campinas. Você pode incluir informações sobre a fundação da escola, seus marcos importantes ao longo dos anos e suas contribuições para a comunidade.'
+        },
+        {
+            x: canvas.width * 0.4,
+            y: canvas.height * 0.2,
+            width: 250,
+            height: 280,
+            text: 'O COTUCA oferece uma variedade de cursos técnicos em diferentes áreas, como Informática, Eletrônica, Mecânica, Química, entre outros. Você pode integrar informações sobre esses cursos, destacando suas características e oportunidades de carreira associadas'
+        },
+        {
+            x: canvas.width * 0.65,
+            y: canvas.height * 0.3,
+            width: 250,
+            height: 210,
+            text: 'O COTUCA possui uma infraestrutura moderna e bem equipada para apoiar o ensino técnico. Você pode incluir informações sobre as instalações da escola, como laboratórios, salas de aula, biblioteca, quadras esportivas, entre outros'
+        },
+        // Adicione mais balões conforme necessário
+    ];
+
+    function draw() {
+        // Limpa o canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Define o raio do canto do balão
+        var cornerRadius = 20;
+
+        // Itera sobre os balões e desenha cada um
+        balloons.forEach(function(balloon) {
+            // Calcula a nova posição vertical do balão com base no tempo
+            var newY = balloon.y + amplitude * Math.sin(frequency * Date.now());
+
+            // Desenha o balão
+            ctx.beginPath();
+            ctx.moveTo(balloon.x + cornerRadius, newY);
+            ctx.arcTo(balloon.x + balloon.width, newY, balloon.x + balloon.width, newY + cornerRadius, cornerRadius);
+            ctx.arcTo(balloon.x + balloon.width, newY + balloon.height, balloon.x + balloon.width - cornerRadius, newY + balloon.height, cornerRadius);
+            ctx.arcTo(balloon.x, newY + balloon.height, balloon.x, newY, cornerRadius);
+            ctx.arcTo(balloon.x, newY, balloon.x + balloon.width, newY, cornerRadius);
+            ctx.fillStyle = '#f0f0f0'; // cor de fundo do balão
+            ctx.fill();
+
+            // Define as propriedades do texto
+            ctx.fillStyle = '#000000'; // cor do texto
+            ctx.font = '16px Arial';
+            var maxWidth = balloon.width - 40; // largura máxima do texto dentro do balão
+            var lineHeight = 20; // altura de cada linha de texto
+
+            var words = balloon.text.split(' ');
+            var line = '';
+            var lines = [];
+
+            for(var i = 0; i < words.length; i++) {
+                var testLine = line + words[i] + ' ';
+                var metrics = ctx.measureText(testLine);
+                var testWidth = metrics.width;
+                if (testWidth > maxWidth && i > 0) {
+                    lines.push(line);
+                    line = words[i] + ' ';
+                } else {
+                    line = testLine;
+                }
+            }
+            lines.push(line);
+
+            // Desenha o texto
+            var textX = balloon.x + 20;
+            var textY = newY + 30;
+
+            for (var j = 0; j < lines.length; j++) {
+                ctx.fillText(lines[j], textX, textY + (j * lineHeight));
+            }
+        });
+
+        // Solicita a próxima animação
+        requestAnimationFrame(draw);
+    }
+
+    // Inicia a animação
+    draw();
+</script>
+</body>
+</html>
