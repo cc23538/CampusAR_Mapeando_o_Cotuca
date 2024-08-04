@@ -1,9 +1,9 @@
 .header {
-    background: #6c757d;
+    background: #692133;
     height: 100vh;
     display: flex;
     align-items: center;
-    color: white;
+    color: whitesmoke;
 }
 
 .header .my-auto {
@@ -31,7 +31,7 @@
 }
 
 .bg-light {
-    background-color: #f8f9fa !important;
+    background-color: #f8f9fa;
 }
 
 .img-fluid {

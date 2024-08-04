@@ -12,30 +12,32 @@
 </head>
 <body>
  
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Cotuca</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">
+            <img src="img/COTUCA_logo.png" alt="Cotuca Logo" style="height: 40px;">
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#about">Sobre</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#technologies">Tecnologias</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#ar">Realidade Aumentada</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#courses">Cursos</a>
-                </li>
+                    <a class="nav-link" href="#technologies">Tecnologias</a>
+                </li> 
                 <li class="nav-item">
                     <a class="nav-link" href="#vestibular">Vestibular</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-primary text-white" href="#contact">Contato</a>
+                    <a class="nav-link" href="#about">Sobre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#feedback">Feedback</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-dark text-white" href="#login">Login</a>
                 </li>
             </ul>
         </div>
@@ -52,7 +54,7 @@
                         <hr>
                         <p class="text-faded mb-5 text-center">Explore a escola Cotuca e conheça seus cursos de uma forma inovadora usando realidade aumentada.</p>
                         <div class="text-center">
-                            <a class="btn btn-primary btn-xl" href="canvas.html">Saiba Mais</a>
+                            <a class="btn btn-dark btn-xl" href="canvas.html">Saiba Mais</a>
                         </div>
                     </div>
                 </div>
@@ -67,7 +69,7 @@
         <div class="container">
             <h2 class="mb-4">Realidade Aumentada no Projeto</h2>
             <p class="lead mb-4">A realidade aumentada (RA) é uma tecnologia inovadora que combina o mundo real com elementos virtuais, proporcionando uma experiência imersiva e interativa.</p>
-            <p class="lead mb-4">No projeto Cotuca, a RA está sendo utilizada para:</p>
+            <p class="lead mb-4">No projeto Campus ar, a RA está sendo utilizada para:</p>
             <div class="row mb-4">
                 <div class="col-md-4">
                     <div class="feature-box bg-white shadow-sm p-4 rounded">
@@ -182,77 +184,6 @@
         </div>
     </section>
 
-    <section id="feedback" class="bg-light text-center py-5">
-        <div class="container">
-            <h2 class="mb-5">Feedback dos Usuários</h2>
-    
-            <!-- Carousel -->
-            <div id="feedback-carousel" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner" id="carousel-inner">
-                    <!-- Itens do Carousel serão preenchidos dinamicamente -->
-                </div>
-                <a class="carousel-control-prev" href="#feedback-carousel" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Anterior</span>
-                </a>
-                <a class="carousel-control-next" href="#feedback-carousel" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Próximo</span>
-                </a>
-            </div>
-            <!-- Fim do Carousel -->
-    
-            <!-- Formulário para Novo Comentário -->
-            <div class="row mt-5">
-                <div class="col-lg-8 mx-auto">
-                    <h3>Deixe seu Comentário</h3>
-                    <form id="comment-form">
-                        <div class="form-group">
-                            <textarea id="comment-text" class="form-control" rows="3" placeholder="Escreva seu comentário"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input id="comment-author" type="text" class="form-control" placeholder="Seu Nome">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Enviar Comentário</button>
-                    </form>
-                </div>
-            </div>
-            <!-- Fim do Formulário -->
-            
-        </div>
-    </section>
-    
-    <section id="courses" class="text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <h2>Cursos Oferecidos</h2>
-                    <p class="lead">O Cotuca oferece uma variedade de cursos técnicos em diferentes áreas:</p>
-                    <ul class="list-unstyled">
-                        <li>Técnico em Informática</li>
-                        <li>Técnico em Eletrônica</li>
-                        <li>Técnico em Mecatrônica</li>
-                        <li>Técnico em Enfermagem</li>
-                        <li>Técnico em Química</li>
-                        <!-- Adicione mais cursos conforme necessário -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="vestibular" class="bg-light text-center">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <h2>Vestibular</h2>
-                    <p class="lead">O Cotuca realiza vestibulares anuais para selecionar novos alunos. Fique atento às datas e prepare-se para fazer parte de uma das melhores escolas técnicas do país.</p>
-                    <a class="btn btn-primary btn-xl" href="https://www.cotuca.unicamp.br/vestibulinho" target="_blank">Saiba Mais</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="about" class="bg-light text-center py-5">
         <div class="container">
             <h2 class="mb-5">Sobre o Cotuca</h2>
@@ -345,7 +276,7 @@
             <!-- Depoimentos -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h3>Depoimentos de Alunos</h3>
+                    <h3>Depoimentos dos ex-alunos</h3>
                     <div class="row">
                         <div class="col-md-4 mb-4">
                             <div class="card shadow-sm">
@@ -377,6 +308,54 @@
         </div>
     </section>
 
+    <section id="vestibular" class="bg-light text-center py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="mb-4">Vestibular</h2>
+                    <p class="lead mb-4">O Cotuca realiza vestibulares anuais para selecionar novos alunos. Fique atento às datas e prepare-se para fazer parte de uma das melhores escolas técnicas do país.</p>
+                    <a class="btn btn-dark btn-xl" href="https://www.cotuca.unicamp.br/vestibulinho" target="_blank">
+                        <i class="fas fa-info-circle"></i> Saiba Mais
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <section id="feedback" class="bg-light text-center py-5">
+        <div class="container">
+            <h2 class="mb-5">Feedback dos Usuários</h2>
+            <div id="feedback-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="carousel-inner">
+                </div>
+                <a class="carousel-control-prev" href="#feedback-carousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#feedback-carousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Próximo</span>
+                </a>
+            </div>
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto">
+                    <h3>Deixe seu Comentário</h3>
+                    <form id="comment-form">
+                        <div class="form-group">
+                            <textarea id="comment-text" class="form-control" rows="3" placeholder="Escreva seu comentário"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input id="comment-author" type="text" class="form-control" placeholder="Seu Nome">
+                        </div>
+                        <button type="submit" class="btn btn-dark">Enviar Comentário</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -394,7 +373,6 @@
         </div>
     </footer>
     
-    <!-- jQuery, Popper.js, Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

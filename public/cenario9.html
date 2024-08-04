@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://aframe.io https://raw.githack.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://aframe.io https://raw.githack.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' https://aframe.io https://raw.githack.com; connect-src 'self' https://aframe.io https://raw.githack.com https://ar-js-org.github.io; child-src 'self' blob: data:;">
   <title>Realidade Aumentada Cotuca</title>
-  <link rel="stylesheet" href="/CSS/cenario6.css">
+  <link rel="stylesheet" href="/CSS/cenario9.css">
   <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 </head>
@@ -13,11 +13,11 @@
   <div id="conteudoInicial">
     <h1>Bem-vindo à Exploração Cotuca</h1>
     <button id="iniciarRA">Iniciar RA</button>
-    <img id="background" src="/img/biblioteca canva.png" alt="Fundo">
+    <img id="background" src="./img/SALAO NOBRE.jpg" alt="Fundo">
   </div>
   <div id="conteudoAR" style="display: none;">
     <button id="sairAR">Sair RA</button>
-    <a-scene embedded arjs="trackingMethod: best; sourceType: webcam;">
+    <a-scene embedded arjs>
       <a-marker preset="hiro">
         <a-box position="0 0.5 0" material="color: red;"></a-box>
       </a-marker>
@@ -28,8 +28,8 @@
     <img src="./img/mensagem.png" alt="Informação">
     <div class="balloon-text">
       <p>Bem-vindo à escola Cotuca! Aqui você encontra os melhores cursos técnicos e uma infraestrutura de ponta.</p>
+    </div>
   </div>
-  </div>
-  <script src="/js/cenario6.js"></script>
+  <script src="/js/cenario9.js"></script>
 </body>
 </html>
