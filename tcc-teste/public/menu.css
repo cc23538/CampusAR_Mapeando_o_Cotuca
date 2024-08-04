@@ -1,4 +1,4 @@
-/* Estiliza o menu */
+
 .menu {
     width: 450px;
     position: fixed;
@@ -7,7 +7,7 @@
     transform: translate(-50%, -50%);
     padding: 20px;
     background-color: #0000009d;
-    border: 2px solid #6c1d1c; /* Tom de vinho */
+    border: 2px solid #6c1d1c;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1000;
@@ -18,13 +18,13 @@
     display: none;
 }
 
-/* Estiliza os botões */
+
 .menu button {
     display: block;
     margin: 10px auto;
     padding: 10px 20px;
     font-size: 1em;
-    background-color: #6c1d1c; /* Tom de vinho */
+    background-color: #6c1d1c;
     border: none;
     color: white;
     border-radius: 5px;
@@ -32,17 +32,11 @@
 }
 
 .menu button:hover {
-    background-color: #4b0e0e; /* Tom de vinho mais escuro */
+    background-color: #4b0e0e;
 }
 
-/* Estiliza o canvas do jogo 
-#gameCanvas {
-    width: 100%;
-    height: 100vh;
-    background-color: #15704a;
-}*/
 
-/* Estiliza o painel de status */
+
 #statusPanel {
     position: fixed;
     top: 10px;
@@ -53,14 +47,14 @@
     border-radius: 5px;
 }
 
-/* Estiliza o botão de abrir o menu de pausa */
+
 .menu-toggle {
     position: fixed;
     top: 20px;
     right: 120px;
     padding: 10px 20px;
     font-size: 1em;
-    background-color: #6c1d1c; /* Tom de vinho */
+    background-color: #6c1d1c; 
     border: none;
     color: white;
     border-radius: 5px;
@@ -69,17 +63,17 @@
 }
 
 .menu-toggle:hover {
-    background-color: #4b0e0e; /* Tom de vinho mais escuro */
+    background-color: #4b0e0e;
 }
 
-/* Estiliza o logo do menu */
+
 .menu-logo {
     width: 100px;
     height: auto;
     margin-bottom: 20px;
 }
 
-/* Estiliza o ícone do botão de pausa */
+
 .icon {
     width: 24px;
     height: auto;

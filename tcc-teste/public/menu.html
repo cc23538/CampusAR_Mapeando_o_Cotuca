@@ -4,19 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canvas Game - Configurações</title>
-    <link rel="stylesheet" href="/public/menu.css"> <!-- Link para o CSS -->
+    <link rel="stylesheet" href="/public/menu.css"> 
 </head>
 <body>
-    <!-- Canvas do jogo -->
+
     <canvas id="gameCanvas"></canvas>
-    
-    <!-- Painel de Status -->
+   
     <div id="statusPanel" class="hidden">
         <p>Vida: <span id="health">100</span></p>
         <p>Pontuação: <span id="score">0</span></p>
     </div>
     
-    <!-- Menu de Pausa -->
     <div id="pauseMenu" class="menu hidden">
         <img src="./img/icons8-css-48.png" alt="Cotuca Logo" class="menu-logo">
         <h2>Pausa</h2>
@@ -26,7 +24,6 @@
         <button id="exitBtn">Sair</button>
     </div>
     
-    <!-- Menu de Configurações -->
     <div id="settingsMenu" class="menu hidden">
         <img src="./img/icons8-html-48.png" alt="Cotuca Logo" class="menu-logo">
         <h2>Configurações</h2>
@@ -35,12 +32,11 @@
         <button id="backToPause">Voltar</button>
     </div>
 
-    <!-- Botão para abrir o menu de pausa -->
     <button id="openPauseMenu" class="menu-toggle">
         <img src="./img/icons8-css-48.png" alt="Pause Icon" class="icon">
     </button>
 
     
-    <script src="menu.js"></script> <!-- Link para o JavaScript -->
+    <script src="menu.js"></script>
 </body>
 </html>

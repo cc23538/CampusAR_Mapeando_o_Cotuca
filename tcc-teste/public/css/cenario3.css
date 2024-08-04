@@ -1,4 +1,4 @@
-/* cenario1.css */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -52,19 +52,19 @@ body {
     transform: scale(0.95);
   }
   #iniciarRA {
-    position: absolute; /* Permite posicionar o botão de forma absoluta */
-    top: 50%; /* Exemplo de posicionamento */
-    left: 50%; /* Exemplo de posicionamento */
-    transform: translate(-50%, -50%); /* Centraliza o botão em relação ao seu ponto de referência */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   
   #sairAR {
     position: fixed;
     top: 10px;
     right: 10px;
-    z-index: 3; /* Garante que o botão esteja acima de outros elementos */
-    background-color: #FF0000; /* Fundo vermelho para chamar atenção */
-    color: white; /* Texto branco */
+    z-index: 3; 
+    background-color: #FF0000;
+    color: white; 
   }
   .balloon-icon {
     position: absolute;
