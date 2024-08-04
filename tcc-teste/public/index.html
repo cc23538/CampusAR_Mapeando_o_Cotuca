@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotuca - Realidade Aumentada</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/stylesHome.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/public/js/main.js" defer></script>
+    <script src="/public/js/hashTable.js" defer></script>
+</head>
+<body>
+ 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Cotuca</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">Sobre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#technologies">Tecnologias</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#ar">Realidade Aumentada</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#courses">Cursos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#vestibular">Vestibular</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary text-white" href="#contact">Contato</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="header text-white d-flex">
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-6 my-auto">
+                    <div class="header-content">
+                        <h1 class="text-uppercase text-center">
+                            <strong>Bem-vindo ao Campus AR</strong>
+                        </h1>
+                        <hr>
+                        <p class="text-faded mb-5 text-center">Explore a escola Cotuca e conheça seus cursos de uma forma inovadora usando realidade aumentada.</p>
+                        <div class="text-center">
+                            <a class="btn btn-primary btn-xl" href="canvas.html">Saiba Mais</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="./img/homeconversations.png" alt="Imagem da Cotuca" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="ar" class="bg-light text-center py-5">
+        <div class="container">
+            <h2 class="mb-4">Realidade Aumentada no Projeto</h2>
+            <p class="lead mb-4">A realidade aumentada (RA) é uma tecnologia inovadora que combina o mundo real com elementos virtuais, proporcionando uma experiência imersiva e interativa.</p>
+            <p class="lead mb-4">No projeto Cotuca, a RA está sendo utilizada para:</p>
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="feature-box bg-white shadow-sm p-4 rounded">
+                        <h4>Exploração Virtual</h4>
+                        <p>Permite que os alunos explorem a escola virtualmente, como se estivessem realmente lá.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-box bg-white shadow-sm p-4 rounded">
+                        <h4>Tours Interativos</h4>
+                        <p>Oferece tours interativos dos laboratórios e salas de aula, com informações detalhadas e interativas.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-box bg-white shadow-sm p-4 rounded">
+                        <h4>Detalhes dos Equipamentos</h4>
+                        <p>Proporciona uma visão detalhada dos equipamentos e recursos disponíveis na escola.</p>
+                    </div>
+                </div>
+            </div>
+            <p class="lead mb-4">Veja alguns exemplos de como a RA está sendo aplicada:</p>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <img src="./img/homeconversations.png" alt="Exemplo de RA 1" class="img-fluid rounded shadow-sm">
+                    <p class="mt-2">Imagem explicativa sobre a utilização da RA.</p>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <img src="./img/homeconversations.png" alt="Exemplo de RA 2" class="img-fluid rounded shadow-sm">
+                    <p class="mt-2">Imagem mostrando um tour virtual.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="technologies" class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Tecnologias Utilizadas</h2>
+            <div class="row text-center">
+                <!-- Tecnologia 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="tech-card bg-white shadow-sm p-4">
+                        <img src="/img/icons8-html-48.png" alt="HTML5" class="img-fluid mb-3 tech-icon">
+                        <h4 class="tech-title">HTML5</h4>
+                        <p class="tech-description">HTML5 é a última versão da linguagem de marcação HTML, que é usada para estruturar e exibir conteúdo na web. Oferece novos elementos e APIs para criar experiências mais ricas e interativas.</p>
+                    </div>
+                </div>
+                <!-- Tecnologia 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="tech-card bg-white shadow-sm p-4">
+                        <img src="/img/icons8-css-48.png" alt="CSS3" class="img-fluid mb-3 tech-icon">
+                        <h4 class="tech-title">CSS3</h4>
+                        <p class="tech-description">CSS3 é a última versão da linguagem de folhas de estilo em cascata, usada para estilizar e formatar a apresentação de páginas web. Inclui novas funcionalidades como flexbox e grid layout para layouts responsivos.</p>
+                    </div>
+                </div>
+                <!-- Tecnologia 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="tech-card bg-white shadow-sm p-4">
+                        <img src="/img/icons8-javascript-48.png" alt="JavaScript" class="img-fluid mb-3 tech-icon">
+                        <h4 class="tech-title">JavaScript</h4>
+                        <p class="tech-description">JavaScript é uma linguagem de programação que permite adicionar interatividade às páginas web. É amplamente utilizada para desenvolvimento front-end e também pode ser usada no back-end com Node.js.</p>
+                    </div>
+                </div>
+                <!-- Tecnologia 4 -->
+                <div class="col-md-4 mb-4">
+                    <div class="tech-card bg-white shadow-sm p-4">
+                        <img src="/img/icons8-bootstrap-48.png" alt="Bootstrap" class="img-fluid mb-3 tech-icon">
+                        <h4 class="tech-title">Bootstrap</h4>
+                        <p class="tech-description">Bootstrap é um framework front-end que facilita a criação de páginas web responsivas e modernas. Oferece uma coleção de componentes e estilos prontos para uso, acelerando o processo de desenvolvimento.</p>
+                    </div>
+                </div>
+                <!-- Tecnologia 5 -->
+                <div class="col-md-4 mb-4">
+                    <div class="tech-card bg-white shadow-sm p-4">
+                        <img src="/img/icons8-realidade-aumentada-48.png" alt="AR.js" class="img-fluid mb-3 tech-icon">
+                        <h4 class="tech-title">AR.js</h4>
+                        <p class="tech-description">AR.js é uma biblioteca JavaScript que permite adicionar realidade aumentada a páginas web. Facilita a criação de experiências imersivas com sobreposição de objetos 3D e interações em tempo real.</p>
+                    </div>
+                </div>
+                <!-- Tecnologia 6: Tabela de Hash -->
+                <div class="col-md-4 mb-4">
+                    <div class="tech-card bg-white shadow-sm p-4">
+                        <img src="/img/icons8estrutura-50.png" alt="Tabela de Hash" class="img-fluid mb-3 tech-icon">
+                        <h4 class="tech-title">Tabela de Hash</h4>
+                        <p class="tech-description">Utilizamos uma tabela de hash para armazenar e gerenciar os comentários dos usuários. Essa estrutura permite acesso rápido e eficiente aos dados, com tratamento de colisões e rehashing para manter o desempenho.</p>
+                    </div>
+                </div>
+                <!-- Tecnologia 7: Canvas -->
+                <div class="col-md-4 mb-4">
+                    <div class="tech-card bg-white shadow-sm p-4">
+                        <img src="/img/icons8-html5-64.png" alt="Canvas" class="img-fluid mb-3 tech-icon">
+                        <h4 class="tech-title">Canvas</h4>
+                        <p class="tech-description">O HTML5 Canvas é usado para criar gráficos dinâmicos e interativos no navegador. No nosso projeto, ele é utilizado para renderizar o ambiente da escola Cotuca e interações dentro do jogo.</p>
+                    </div>
+                </div>
+                <!-- Tecnologia 8: DOM -->
+                <div class="col-md-4 mb-4">
+                    <div class="tech-card bg-white shadow-sm p-4">
+                        <img src="/img/icons8-estrutura-.png" alt="DOM" class="img-fluid mb-3 tech-icon">
+                        <h4 class="tech-title">DOM</h4>
+                        <p class="tech-description">O DOM (Document Object Model) é usado para manipular e atualizar a estrutura e o conteúdo das páginas web dinamicamente. Utilizamos o DOM para interagir com o conteúdo da página e atualizar a interface com os comentários dos usuários.</p>
+                    </div>
+                </div>
+                <!-- Tecnologia 9: Socket.IO -->
+                <div class="col-md-4 mb-4">
+                    <div class="tech-card bg-white shadow-sm p-4">
+                        <img src="/img/icons8-servidor-64.png" alt="Socket.IO" class="img-fluid mb-3 tech-icon">
+                        <h4 class="tech-title">Socket.IO</h4>
+                        <p class="tech-description">Socket.IO é uma biblioteca para comunicação em tempo real baseada em eventos. Utilizamos Socket.IO para permitir a comunicação bidirecional entre o cliente e o servidor, facilitando a atualização em tempo real dos dados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="feedback" class="bg-light text-center py-5">
+        <div class="container">
+            <h2 class="mb-5">Feedback dos Usuários</h2>
+    
+            <!-- Carousel -->
+            <div id="feedback-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="carousel-inner">
+                    <!-- Itens do Carousel serão preenchidos dinamicamente -->
+                </div>
+                <a class="carousel-control-prev" href="#feedback-carousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#feedback-carousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Próximo</span>
+                </a>
+            </div>
+            <!-- Fim do Carousel -->
+    
+            <!-- Formulário para Novo Comentário -->
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto">
+                    <h3>Deixe seu Comentário</h3>
+                    <form id="comment-form">
+                        <div class="form-group">
+                            <textarea id="comment-text" class="form-control" rows="3" placeholder="Escreva seu comentário"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input id="comment-author" type="text" class="form-control" placeholder="Seu Nome">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar Comentário</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Fim do Formulário -->
+            
+        </div>
+    </section>
+    
+    <section id="courses" class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2>Cursos Oferecidos</h2>
+                    <p class="lead">O Cotuca oferece uma variedade de cursos técnicos em diferentes áreas:</p>
+                    <ul class="list-unstyled">
+                        <li>Técnico em Informática</li>
+                        <li>Técnico em Eletrônica</li>
+                        <li>Técnico em Mecatrônica</li>
+                        <li>Técnico em Enfermagem</li>
+                        <li>Técnico em Química</li>
+                        <!-- Adicione mais cursos conforme necessário -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vestibular" class="bg-light text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2>Vestibular</h2>
+                    <p class="lead">O Cotuca realiza vestibulares anuais para selecionar novos alunos. Fique atento às datas e prepare-se para fazer parte de uma das melhores escolas técnicas do país.</p>
+                    <a class="btn btn-primary btn-xl" href="https://www.cotuca.unicamp.br/vestibulinho" target="_blank">Saiba Mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="bg-light text-center py-5">
+        <div class="container">
+            <h2 class="mb-5">Sobre o Cotuca</h2>
+            
+            <!-- História -->
+            <div class="row mb-5">
+                <div class="col-lg-6">
+                    <h3>História do Cotuca</h3>
+                    <p class="lead">Fundado em 1968, o Cotuca é um dos mais tradicionais colégios técnicos de Campinas. Desde então, temos formado profissionais de alta qualidade, com um ensino técnico e prático que prepara nossos alunos para os desafios do mercado de trabalho.</p>
+                    <p class="lead">Com uma abordagem inovadora e infraestrutura de ponta, o Cotuca continua a ser um referencial em educação técnica e tecnológica.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="/img/escola-cotuca.jpg" alt="História do Cotuca" class="img-fluid rounded shadow-sm">
+                </div>
+            </div>
+    
+            <!-- Cursos Oferecidos -->
+            <div class="row mb-5">
+                <div class="col-lg-12">
+                    <h3>Cursos Oferecidos</h3>
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow-sm">
+                                <img src="/img/icons8-pc-50.png" class="card-img-top" alt="Curso 1" style="width: 20%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Curso de Informática</h5>
+                                    <p class="card-text">Prepare-se para o mercado de TI com nosso curso de informática, abrangendo desde fundamentos até técnicas avançadas.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow-sm">
+                                <img src="/img/icons8-placa-mãe-50.png" class="card-img-top" alt="Curso 2" style="width: 20%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Curso de Eletrônica</h5>
+                                    <p class="card-text">Desenvolva habilidades práticas em eletrônica com nosso curso, que inclui trabalho de laboratório e teoria avançada.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow-sm">
+                                <img src="/img/icons8-mechatronics-32.png" class="card-img-top" alt="Curso 3" style="width: 20%;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Curso de Mecânica</h5>
+                                    <p class="card-text">Adquira conhecimentos essenciais em mecânica, com ênfase em práticas e tecnologias modernas do setor.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Linha do Tempo -->
+            <div class="row mb-5">
+                <div class="col-lg-12">
+                    <h3 class="text-center">Linha do Tempo</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-icon bg-primary"><i class="fas fa-star"></i></div>
+                            <div class="timeline-content">
+                                <h4>1968</h4>
+                                <p>Fundação do Cotuca, iniciando sua trajetória na educação técnica.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon bg-secondary"><i class="fas fa-school"></i></div>
+                            <div class="timeline-content">
+                                <h4>1990</h4>
+                                <p>Expansão dos cursos oferecidos e modernização da infraestrutura.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon bg-success"><i class="fas fa-laptop-code"></i></div>
+                            <div class="timeline-content">
+                                <h4>2000</h4>
+                                <p>Implementação de novos programas tecnológicos e parcerias com empresas.</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-icon bg-danger"><i class="fas fa-digital-tachograph"></i></div>
+                            <div class="timeline-content">
+                                <h4>2020</h4>
+                                <p>Lançamento de novos cursos e integração com plataformas digitais.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+            <!-- Depoimentos -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3>Depoimentos de Alunos</h3>
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <p class="card-text">"O Cotuca me preparou muito bem para o mercado de trabalho. As aulas práticas e o suporte dos professores foram essenciais para minha carreira."</p>
+                                    <p class="card-text"><strong>Lucas Almeida</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <p class="card-text">"Os cursos oferecidos são de excelente qualidade. Tive uma formação sólida e prática que me ajudou a ingressar rapidamente no mercado."</p>
+                                    <p class="card-text"><strong>Fernanda Costa</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <p class="card-text">"O Cotuca tem uma infraestrutura excelente e oferece um ensino técnico que realmente faz a diferença na vida dos alunos."</p>
+                                    <p class="card-text"><strong>Rafael Silva</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <p>&copy; 2024 Rafaela Ferreira Dos Santos.<br> Todos os direitos reservados.</p>
+                </div>
+                <div>
+                    <p><a href="cc23538@g.unicam.br">Contato</a> | <a href="sobre.html">Sobre</a> | <a href="privacidade.html">Política de Privacidade</a></p>
+                </div>
+                <div class="license">
+                    <p>Este trabalho está licenciado sob uma <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt_BR" target="_blank">Licença Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional</a>.</p>
+                    <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt_BR" target="_blank"><img alt="Licença Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <!-- Script JavaScript para manipular os comentários -->
+    <script type="module">
+        import CommentManager from '/js/CommentManager.js';
+
+        const commentManager = new CommentManager();
+
+        document.getElementById("comment-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const commentText = document.getElementById("comment-text").value;
+            const commentAuthor = document.getElementById("comment-author").value;
+            commentManager.addComment(commentText, commentAuthor);
+            document.getElementById("comment-text").value = '';
+            document.getElementById("comment-author").value = '';
+        });
+
+        // Inicializar a renderização dos comentários ao carregar a página
+        commentManager.renderComments();
+    </script>
+
+</body>
+</html>

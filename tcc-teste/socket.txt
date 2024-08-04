@@ -1,0 +1,76 @@
+socket
+
+multiplayer e chat.
+
+let players = {};
+
+io.on('connection', (socket) => {
+    console.log('a user connected: ' + socket.id);
+
+    players[socket.id] = {
+        x: Math.random() * 800,
+        y: Math.random() * 600
+    };
+
+    socket.emit('currentPlayers', players);
+    socket.broadcast.emit('newPlayer', { id: socket.id, ...players[socket.id] });
+
+    socket.on('disconnect', () => {
+        console.log('user disconnected: ' + socket.id);
+        delete players[socket.id];
+        io.emit('playerDisconnected', socket.id);
+    });
+
+    socket.on('playerMovement', (movementData) => {
+        players[socket.id].x = movementData.x;
+        players[socket.id].y = movementData.y;
+        socket.broadcast.emit('playerMoved', { id: socket.id, x: movementData.x, y: movementData.y });
+    });
+
+    socket.on('chatMessage', (message) => {
+        io.emit('chatMessage', message);
+    });
+});
+
+============================
+const socket = io();
+const canvas = document.getElementById('gameCanvas');
+const context = canvas.getContext('2d');
+
+let players = {};
+
+socket.on('currentPlayers', (currentPlayers) => {
+    players = currentPlayers;
+    drawPlayers();
+});
+
+socket.on('newPlayer', (newPlayer) => {
+    players[newPlayer.id] = newPlayer;
+    drawPlayers();
+});
+
+socket.on('playerMoved', (movedPlayer) => {
+    players[movedPlayer.id].x = movedPlayer.x;
+    players[movedPlayer.id].y = movedPlayer.y;
+    drawPlayers();
+});
+
+socket.on('playerDisconnected', (id) => {
+    delete players[id];
+    drawPlayers();
+});
+
+function drawPlayers() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    for (let id in players) {
+        context.fillRect(players[id].x, players[id].y, 50, 50);
+    }
+}
+
+canvas.addEventListener('mousemove', (event) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    socket.emit('playerMovement', { x, y });
+});
+

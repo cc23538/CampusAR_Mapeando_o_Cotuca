@@ -1,0 +1,252 @@
+.header {
+    background: #6c757d;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+
+.header .my-auto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.header p {
+    font-size: 1.25rem;
+}
+
+.btn-xl {
+    padding: 1rem 2rem;
+    font-size: 1.25rem;
+}
+
+#about, #technologies, #ar, #courses, #vestibular, #contact {
+    padding: 5rem 0;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+.header-content {
+    text-align: center;
+}
+
+.card {
+    border: none;
+}
+
+.card-body {
+    text-align: left;
+}
+
+.card-text {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+}
+
+.card-text strong {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.tech-card {
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.tech-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.tech-icon {
+    max-width: 100px; /* Ajuste o tamanho do ícone conforme necessário */
+}
+
+.tech-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.tech-description {
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+.feature-box {
+    border: 1px solid #ddd;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+img.rounded {
+    border-radius: 8px;
+}
+
+.shadow-sm {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.lead {
+    font-size: 1.25rem;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-content div {
+    flex: 1;
+    padding: 10px;
+}
+
+.footer-content a {
+    color: #ffd700;
+    text-decoration: none;
+}
+
+.footer-content a:hover {
+    color: #ffa500;
+}
+
+.license {
+    text-align: right;
+    font-size: 0.9em;
+}
+
+.license img {
+    margin-top: 10px;
+}
+
+.timeline {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 50px;
+    overflow: hidden;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #ddd;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.timeline-item {
+    position: relative;
+    width: 22%;
+    text-align: center;
+    z-index: 2;
+}
+
+.timeline-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #007bff;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px auto;
+    font-size: 24px;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.timeline-item:hover .timeline-icon {
+    background: #0056b3;
+    transform: scale(1.1);
+}
+
+.timeline-content {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.timeline-item:hover .timeline-content {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.timeline h4 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.timeline p {
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+}
+
+@media (max-width: 767.98px) {
+    .timeline {
+        flex-direction: column;
+    }
+
+    .timeline::before {
+        top: auto;
+        left: 50%;
+        height: auto;
+        width: 4px;
+        transform: translateX(-50%);
+    }
+
+    .timeline-item {
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .timeline-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .timeline-item .timeline-content {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+        margin-right: 0;
+    }
+}
