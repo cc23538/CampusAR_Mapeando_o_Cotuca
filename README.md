@@ -68,7 +68,7 @@ Este projeto está licenciado sob a [Licença MIT](LICENSE).
 Para mais informações, entre em contato:
 
 - Nome: [Rafaela Ferreira Dos Santos]
-- E-mail: [cc23538@gunicamp.br]
-- GitHub: [cc23538](https://github.com/seu-usuario)
+- E-mail: [cc23538@g.unicamp.br]
+- GitHub: [cc23538](https://github.com/cc23538)
 
     
