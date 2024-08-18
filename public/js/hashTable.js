@@ -16,23 +16,24 @@ class HashTable {
 
     // Método para adicionar um par chave-valor à tabela
     set(key, value) {
-        const index = this.hash(key);
-        if (!this.buckets[index]) {
-            this.buckets[index] = [];
+        if (this.count / this.size > 0.7) { // fator de carga para rehash
+            this.rehash();
         }
-
-        // Tratamento de colisões 
+    
+        const index = this.hash(key);
         let position = index;
+    
+        // Tratamento de colisões
         while (this.buckets[position] !== undefined && this.buckets[position][0] !== key) {
             position = (position + 1) % this.size;
-            if (position === index) {
-                // Tabela cheia - rehash necessário
-                this.rehash();
-                position = this.hash(key);
-            }
         }
-
+    
+        // Adicionar ou atualizar o par chave-valor
+        if (this.buckets[position] === undefined) {
+            this.count++;
+        }
         this.buckets[position] = [key, value];
+        console.log(`Salvando ${key}: ${value} na posição ${position}`);
     }
 
     // Método para buscar um valor na tabela por chave
@@ -74,4 +75,9 @@ class HashTable {
         this.size = newSize;
     }
 }
-module.exports = HashTable;
+
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = HashTable;
+} else {
+    window.HashTable = HashTable;
+}

@@ -1,5 +1,4 @@
-
-const canvas = document.getElementById('gameCanvas');
+const canvas = document.getElementById('gameCanvas'); // Corrigido para corresponder ao ID do HTML
 const ctx = canvas.getContext('2d');
 const statusPanel = document.getElementById('statusPanel');
 const pauseMenu = document.getElementById('pauseMenu');
@@ -26,15 +25,12 @@ function hideMenus() {
     statusPanel.classList.remove('hidden');
 }
 
-
 document.getElementById('resumeBtn').addEventListener('click', () => {
     hideMenus();
-    
 });
 
 document.getElementById('restartBtn').addEventListener('click', () => {
     hideMenus();
-    
 });
 
 document.getElementById('settingsBtn').addEventListener('click', () => {
@@ -42,7 +38,6 @@ document.getElementById('settingsBtn').addEventListener('click', () => {
 });
 
 document.getElementById('exitBtn').addEventListener('click', () => {
-   
     alert('Saindo do jogo...');
 });
 
@@ -50,30 +45,25 @@ document.getElementById('backToPause').addEventListener('click', () => {
     showPauseMenu();
 });
 
-
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
         showPauseMenu();
     }
 });
 
-
 document.getElementById('openPauseMenu').addEventListener('click', () => {
     showPauseMenu();
 });
-
 
 function updateStatus(health, score) {
     document.getElementById('health').textContent = health;
     document.getElementById('score').textContent = score;
 }
 
-
 function drawCharacter(x, y) {
     ctx.fillStyle = 'red';
     ctx.fillRect(x, y, 50, 50);
 }
-
 
 function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -81,4 +71,4 @@ function update() {
     requestAnimationFrame(update); 
 }
 
-update(); 
+update();

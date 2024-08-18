@@ -1,3 +1,4 @@
+
 .header {
     background: #692133;
     height: 100vh;
@@ -110,6 +111,31 @@ img.rounded {
 
 .lead {
     font-size: 1.25rem;
+}
+
+.player-image {
+    max-width: 100%;
+    height: auto;
+    border: 5px solid #007bff;
+    border-radius: 10px;
+}
+.highlight {
+    color: #007bff;
+    font-weight: bold;
+}
+.section-content {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Roboto', sans-serif;
+}
+.section-content h3 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+.section-content ul {
+    padding-left: 20px;
 }
 
 footer {

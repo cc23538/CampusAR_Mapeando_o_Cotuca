@@ -3,40 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canvas Game - Configurações</title>
-    <link rel="stylesheet" href="/public/menu.css"> 
+    <title>Canvas Game e Escolha de Personagem</title>
+    <link rel="stylesheet" href="/public/menu.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./menu.css">
 </head>
 <body>
 
-    <canvas id="gameCanvas"></canvas>
-   
-    <div id="statusPanel" class="hidden">
-        <p>Vida: <span id="health">100</span></p>
-        <p>Pontuação: <span id="score">0</span></p>
-    </div>
-    
-    <div id="pauseMenu" class="menu hidden">
-        <img src="./img/icons8-css-48.png" alt="Cotuca Logo" class="menu-logo">
-        <h2>Pausa</h2>
-        <button id="resumeBtn">Continuar</button>
-        <button id="restartBtn">Reiniciar</button>
-        <button id="settingsBtn">Configurações</button>
-        <button id="exitBtn">Sair</button>
-    </div>
-    
-    <div id="settingsMenu" class="menu hidden">
-        <img src="./img/icons8-html-48.png" alt="Cotuca Logo" class="menu-logo">
-        <h2>Configurações</h2>
-        <label for="volume">Volume:</label>
-        <input type="range" id="volume" min="0" max="100" value="50">
-        <button id="backToPause">Voltar</button>
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Coluna 1: Canvas Game -->
+            <div class="col-md-6 canvas-container">
+                <canvas id="gameCanvas" class="w-100"></canvas>
+               
+                <!-- Menu de Configurações -->
+                <div id="settingsMenu" class="menu hidden">
+                    <h2>Configurações</h2>
+                    <label for="volume">Volume:</label>
+                    <input type="range" id="volume" min="0" max="100" value="50" class="form-control-range">
+                    <button id="backToPause" class="btn btn-secondary">Voltar</button>
+                </div>
+            </div>
+
+            <!-- Coluna 2: Escolha de Personagem -->
+            <div class="col-md-6">
+                <div class="text-center mb-4">
+                    <h1>Escolha seu Personagem</h1>
+                    <div class="form-group">
+                        <input type="text" id="nickname" class="form-control" placeholder="Digite seu nickname">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 d-flex justify-content-center">
+                        <div class="card">
+                            <img src="#" class="card-img-top" alt="Personagem Feminino">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Personagem Feminino</h5>
+                                <button class="btn btn-primary" onclick="chooseCharacter('Feminino')">Escolher</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-center">
+                        <div class="card">
+                            <img src="#" class="card-img-top" alt="Personagem Masculino">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Personagem Masculino</h5>
+                                <button class="btn btn-primary" onclick="chooseCharacter('Masculino')">Escolher</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <button id="openPauseMenu" class="menu-toggle">
-        <img src="./img/icons8-css-48.png" alt="Pause Icon" class="icon">
-    </button>
+    <script src="main.js"></script>
+    <script src="./js/hashTable.js"></script>
+    <script>
+        const hashTable = new HashTable();
 
-    
-    <script src="menu.js"></script>
+        function chooseCharacter(characterType) {
+            const nickname = document.getElementById('nickname').value;
+            if (nickname === '') {
+                alert('Por favor, digite seu nickname.');
+                return;
+            }
+        
+            console.log(`Escolhendo personagem: ${characterType} para o nickname: ${nickname}`);
+            hashTable.set(nickname, characterType);
+            console.log(`Tabela de Hash:`, hashTable.buckets);
+        
+            alert(`Personagem ${characterType} escolhido e nickname ${nickname} salvo com sucesso!`);
+        }
+
+        document.getElementById('backToPause').addEventListener('click', () => {
+            window.location.href = 'canvas.html'; 
+        });
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
