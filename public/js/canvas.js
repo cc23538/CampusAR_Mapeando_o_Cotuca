@@ -192,7 +192,7 @@ function drawScene() {
 
 // Movimentação do personagem
 document.addEventListener('keydown', (event) => {
-    const step = 10;
+    const step = 11.5;
     switch (event.key) {
         case 'ArrowUp':
             currentDirection = 'up';
