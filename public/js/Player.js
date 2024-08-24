@@ -1,4 +1,4 @@
-// Player.js
+
 import { Sprite } from './Sprite.js';
 
 
