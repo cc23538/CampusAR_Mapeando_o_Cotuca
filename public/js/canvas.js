@@ -117,6 +117,10 @@ export class Game {
                 return;
         }
 
+        if (newY > 940) {
+            newY = 940;
+        }
+
         if (!this.tileMap.isColliding(newX, newY)) {
             this.player.x = newX;
             this.player.y = newY;
@@ -149,16 +153,18 @@ export class Game {
     drawScene() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.drawImage(this.backgroundImage, -this.camera.x, -this.camera.y, this.sceneWidth, this.sceneHeight);
-
+    
         const deltaTime = performance.now() - this.lastTime;
         this.lastTime = performance.now();
-
+    
         if (this.currentDirection !== 'null') {
             this.player.sprites[this.currentDirection].isAnimating = true;
             this.player.sprites[this.currentDirection].update(deltaTime);
+            console.log(`Drawing at X: ${this.player.x - this.camera.x}, Y: ${this.player.y - this.camera.y}`);
             this.player.sprites[this.currentDirection].draw(this.context, this.player.x - this.camera.x, this.player.y - this.camera.y);
         } else {
             Object.values(this.player.sprites).forEach(sprite => sprite.reset());
+            console.log(`Drawing at X: ${this.player.x - this.camera.x}, Y: ${this.player.y - this.camera.y}`);
             this.player.sprites.down.draw(this.context, this.player.x - this.camera.x, this.player.y - this.camera.y);
         }
     }
@@ -185,7 +191,13 @@ export class Game {
 
     navigateToMenu() {
         this.savePlayerPosition();
+        //console.log('Navegando para o menu...');
         window.location.href = 'menu.html'; 
+    }
+
+    initEvents() {
+        document.getElementById('menuButton').addEventListener('click', () => this.navigateToMenu());
+        // Outros eventos
     }
 }
 
