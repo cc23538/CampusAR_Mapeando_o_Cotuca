@@ -89,6 +89,9 @@ export class Game {
     initEvents() {
         document.addEventListener('keydown', (event) => this.handleKeyDown(event));
         document.addEventListener('keyup', () => this.handleKeyUp());
+        
+        document.getElementById('menuButton').addEventListener('click', () => this.navigateToMenu());
+        // Outros eventos
     }
 
     handleKeyDown(event) {
@@ -129,6 +132,10 @@ export class Game {
             this.updateButtonPositions();
             this.savePlayerPosition();
         }
+
+        setTimeout(() => {
+            this.isMoving = false;
+        }, 100); 
     }
 
     handleKeyUp() {
@@ -195,10 +202,7 @@ export class Game {
         window.location.href = 'menu.html'; 
     }
 
-    initEvents() {
-        document.getElementById('menuButton').addEventListener('click', () => this.navigateToMenu());
-        // Outros eventos
-    }
+    
 }
 
 // Inicialize o jogo ao carregar o script
