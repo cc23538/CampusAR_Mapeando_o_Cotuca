@@ -18,33 +18,67 @@ export class Game {
         this.lastTime = 0;
         this.currentDirection = 'null';
 
+        this.characterSprites = {};
+        this.selectedCharacter = localStorage.getItem('selectedCharacter') || 'defaultCharacter';
+
         this.setup();
         this.initEvents();
     }
 
     setup() {
         this.loadScenarioSettings();
+        this.loadPlayerSprites(); // Garanta que os sprites sejam carregados
         this.player = new Player(
-            this.canvas.width / 2, 
-            this.canvas.height / 2, 
-            this.getPlayerSprites()
+            this.canvas.width / 2,
+            this.canvas.height / 2,
+            this.characterSprites
         );
+    
         this.loadPlayerPosition();
         this.backgroundImage.onload = () => {
             this.lastTime = performance.now();
             requestAnimationFrame(() => this.gameLoop());
         };
     }
-
-    getPlayerSprites() {
-        return {
-            down: new Sprite('./img/baixoF.png', 64, 64, 4, 10),
-            up: new Sprite('./img/cimaF.png', 64, 64, 4, 10),
-            left: new Sprite('./img/esquerdaF.png', 64, 64, 4, 10),
-            right: new Sprite('./img/direitaF.png', 64, 64, 4, 10)
+    
+    loadPlayerSprites() {
+        const characterSprites = {
+            'character1': {
+                down: new Sprite('./img/baixo_VerdeEsc.png', 64, 64, 4, 10),
+                up: new Sprite('./img/cima_VerdeEsc.png', 64, 64, 4, 10),
+                left: new Sprite('./img/esquerda_VerdeEsc.png', 64, 64, 4, 10),
+                right: new Sprite('./img/direita_VerdeEsc.png', 64, 64, 4, 10)
+            },
+            'character2': {
+                down: new Sprite('./img/baixoM.png', 64, 64, 4, 10),
+                up: new Sprite('./img/cimaM.png', 64, 64, 4, 10),
+                left: new Sprite('./img/esquerdaM.png', 64, 64, 4, 10),
+                right: new Sprite('./img/direitaM.png', 64, 64, 4, 10)
+            },
+            'character3': {
+                down: new Sprite('./img/baixo_Azul.png', 64, 64, 4, 10),
+                up: new Sprite('./img/cima_Azul.png', 64, 64, 4, 10),
+                left: new Sprite('./img/esquerda_Azul.png', 64, 64, 4, 10),
+                right: new Sprite('./img/direita_Azul.png', 64, 64, 4, 10)
+            },
+            'character4': {
+                down: new Sprite('./img/baixo_Cinza.png', 64, 64, 4, 10),
+                up: new Sprite('./img/cima_Cinza.png', 64, 64, 4, 10),
+                left: new Sprite('./img/esquerda_Cinza.png', 64, 64, 4, 10),
+                right: new Sprite('./img/direita_Cinza.png', 64, 64, 4, 10)
+            },
+            'character5': {
+                down: new Sprite('./img/baixoF.png', 64, 64, 4, 10),
+                up: new Sprite('./img/cimaF.png', 64, 64, 4, 10),
+                left: new Sprite('./img/esquerdaF.png', 64, 64, 4, 10),
+                right: new Sprite('./img/direitaF.png', 64, 64, 4, 10)
+            }
+            // Adicione mais personagens conforme necessário
         };
-    }
 
+        this.characterSprites = characterSprites[this.selectedCharacter] || characterSprites['character1'];
+    }
+   
     loadScenarioSettings() {
         const urlParams = new URLSearchParams(window.location.search);
         const scenarioNumber = urlParams.get('scenario') || '1';
@@ -91,7 +125,14 @@ export class Game {
         document.addEventListener('keyup', () => this.handleKeyUp());
         
         document.getElementById('menuButton').addEventListener('click', () => this.navigateToMenu());
-        // Outros eventos
+       
+        // Eventos para seleção de personagem
+        document.querySelectorAll('.character-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const character = card.getAttribute('data-character');
+                this.changeCharacter(character);
+            });
+        });
     }
 
     handleKeyDown(event) {
@@ -120,9 +161,10 @@ export class Game {
                 return;
         }
 
-        if (newY > 940) {
-            newY = 940;
-        }
+        if (newY > 940) newY = 940;
+    
+        if (newX < 0 || newX > this.sceneWidth || newY < 0 || newY > this.sceneHeight)
+            return; // Evita movimentação fora dos limites do cenário
 
         if (!this.tileMap.isColliding(newX, newY)) {
             this.player.x = newX;
@@ -139,7 +181,7 @@ export class Game {
     }
 
     handleKeyUp() {
-        this.currentDirection = 'null';
+        this.currentDirection = 'null'; //direção quando não se move
         this.drawScene();
     }
 
@@ -164,17 +206,21 @@ export class Game {
         const deltaTime = performance.now() - this.lastTime;
         this.lastTime = performance.now();
     
-        if (this.currentDirection !== 'null') {
-            this.player.sprites[this.currentDirection].isAnimating = true;
-            this.player.sprites[this.currentDirection].update(deltaTime);
-            console.log(`Drawing at X: ${this.player.x - this.camera.x}, Y: ${this.player.y - this.camera.y}`);
-            this.player.sprites[this.currentDirection].draw(this.context, this.player.x - this.camera.x, this.player.y - this.camera.y);
+        const sprite = this.characterSprites[this.currentDirection];
+    
+        if (sprite && this.currentDirection !== 'null') {
+            sprite.isAnimating = true;
+            sprite.update(deltaTime);
+            sprite.draw(this.context, this.player.x - this.camera.x, this.player.y - this.camera.y);
         } else {
-            Object.values(this.player.sprites).forEach(sprite => sprite.reset());
-            console.log(`Drawing at X: ${this.player.x - this.camera.x}, Y: ${this.player.y - this.camera.y}`);
-            this.player.sprites.down.draw(this.context, this.player.x - this.camera.x, this.player.y - this.camera.y);
+            // Exibe o sprite parado se não houver movimento
+            const idleSprite = this.characterSprites['down'];
+            if (idleSprite) {
+                idleSprite.draw(this.context, this.player.x - this.camera.x, this.player.y - this.camera.y);
+            }
         }
     }
+    
 
     savePlayerPosition() {
         localStorage.setItem('playerX', this.player.x);
@@ -185,7 +231,17 @@ export class Game {
         this.player.x = parseInt(localStorage.getItem('playerX')) || this.canvas.width / 2;
         this.player.y = parseInt(localStorage.getItem('playerY')) || this.canvas.height / 2;
     }
-
+    
+    changeCharacter(character) {
+        this.selectedCharacter = character;
+        localStorage.setItem('selectedCharacter', character); // Salva a seleção
+        this.loadPlayerSprites(); // Carrega os sprites do novo personagem
+        this.player = new Player(
+            this.canvas.width / 2,
+            this.canvas.height / 2,
+            this.characterSprites
+        );
+    }
     gameLoop() {
         this.drawScene();
         requestAnimationFrame(() => this.gameLoop());
@@ -199,7 +255,7 @@ export class Game {
     navigateToMenu() {
         this.savePlayerPosition();
         //console.log('Navegando para o menu...');
-        window.location.href = 'menu.html'; 
+        window.location.href = 'selecao.html'; 
     }
 
     

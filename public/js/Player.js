@@ -1,14 +1,10 @@
-
-import { Sprite } from './Sprite.js';
-
-
 export class Player {
-    constructor(initialX, initialY, playerSprites) {
+    constructor(initialX, initialY, sprites) {
         this.x = initialX;
         this.y = initialY;
         this.size = 50;
-        this.sprites = playerSprites;
-        this.currentDirection = 'null';
+        this.sprites = sprites;
+        this.currentDirection = 'null';//down
         this.lastTime = 0;
     }
 
@@ -29,18 +25,24 @@ export class Player {
         }
         this.currentDirection = direction;
     }
-
+ 
     draw(context, camera) {
         const deltaTime = performance.now() - this.lastTime;
         this.lastTime = performance.now();
 
-        if (this.currentDirection !== 'null') {
-            this.sprites[this.currentDirection].isAnimating = true;
-            this.sprites[this.currentDirection].update(deltaTime);
-            this.sprites[this.currentDirection].draw(context, this.x - camera.x, this.y - camera.y);
+        const sprite = this.sprites[this.currentDirection];
+        
+        if (sprite) {
+            sprite.isAnimating = true;
+            sprite.update(deltaTime);
+            sprite.draw(context, this.x - camera.x, this.y - camera.y);
         } else {
-            Object.values(this.sprites).forEach(sprite => sprite.reset());
-            this.sprites.down.draw(context, this.x - camera.x, this.y - camera.y);
+            // Caso de fallback para quando o sprite atual não estiver definido
+            console.warn(`Sprite para direção '${this.currentDirection}' não encontrado.`);
+            const fallbackSprite = this.sprites['down']; // Ou qualquer outro sprite padrão
+            if (fallbackSprite) {
+                fallbackSprite.draw(context, this.x - camera.x, this.y - camera.y);
+            }
         }
     }
 
@@ -53,4 +55,6 @@ export class Player {
         this.x = parseInt(localStorage.getItem('playerX')) || sceneWidth / 2;
         this.y = parseInt(localStorage.getItem('playerY')) || sceneHeight / 2;
     }
+
+    
 }
