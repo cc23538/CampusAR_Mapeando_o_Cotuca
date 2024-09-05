@@ -1,127 +1,276 @@
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
+import { TileMap } from './TileMap.js';
+import { Sprite } from './Sprite.js';
+import { Camera } from './Camera.js';
+import { Player } from './Player.js';
 
-const chatInput = document.getElementById('chatInput');
-const chatMessages = document.getElementById('chatMessages');
-const sendButton = document.getElementById('sendButton');
+export class Game {
+    constructor() {
+        this.canvas = document.getElementById('gameCanvas');
+        this.context = this.canvas.getContext('2d');
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+
+        this.camera = null;
+        this.tileMap = null;
+        this.player = null;
+        this.backgroundImage = new Image();
+        this.buttonPositions = [];
+        this.lastTime = 0;
+        this.currentDirection = 'null';
+
+        this.characterSprites = {};
+        this.selectedCharacter = localStorage.getItem('selectedCharacter') || 'defaultCharacter';
+
+        this.setup();
+        this.initEvents();
+    }
+
+    setup() {
+        this.loadScenarioSettings();
+        this.loadPlayerSprites(); // Garanta que os sprites sejam carregados
+        this.player = new Player(
+            this.canvas.width / 2,
+            this.canvas.height / 2,
+            this.characterSprites
+        );
+    
+        this.loadPlayerPosition();
+        this.backgroundImage.onload = () => {
+            this.lastTime = performance.now();
+            requestAnimationFrame(() => this.gameLoop());
+        };
+    }
+    
+    loadPlayerSprites() {
+        const characterSprites = {
+            'character1': {
+                down: new Sprite('./img/baixo_VerdeEsc.png', 64, 64, 4, 10),
+                up: new Sprite('./img/cima_VerdeEsc.png', 64, 64, 4, 10),
+                left: new Sprite('./img/esquerda_VerdeEsc.png', 64, 64, 4, 10),
+                right: new Sprite('./img/direita_VerdeEsc.png', 64, 64, 4, 10)
+            },
+            'character2': {
+                down: new Sprite('./img/baixoM.png', 64, 64, 4, 10),
+                up: new Sprite('./img/cimaM.png', 64, 64, 4, 10),
+                left: new Sprite('./img/esquerdaM.png', 64, 64, 4, 10),
+                right: new Sprite('./img/direitaM.png', 64, 64, 4, 10)
+            },
+            'character3': {
+                down: new Sprite('./img/baixo_Azul.png', 64, 64, 4, 10),
+                up: new Sprite('./img/cima_Azul.png', 64, 64, 4, 10),
+                left: new Sprite('./img/esquerda_Azul.png', 64, 64, 4, 10),
+                right: new Sprite('./img/direita_Azul.png', 64, 64, 4, 10)
+            },
+            'character4': {
+                down: new Sprite('./img/baixo_Cinza.png', 64, 64, 4, 10),
+                up: new Sprite('./img/cima_Cinza.png', 64, 64, 4, 10),
+                left: new Sprite('./img/esquerda_Cinza.png', 64, 64, 4, 10),
+                right: new Sprite('./img/direita_Cinza.png', 64, 64, 4, 10)
+            },
+            'character5': {
+                down: new Sprite('./img/baixoF.png', 64, 64, 4, 10),
+                up: new Sprite('./img/cimaF.png', 64, 64, 4, 10),
+                left: new Sprite('./img/esquerdaF.png', 64, 64, 4, 10),
+                right: new Sprite('./img/direitaF.png', 64, 64, 4, 10)
+            }
+            // Adicione mais personagens conforme necessário
+        };
+
+        this.characterSprites = characterSprites[this.selectedCharacter] || characterSprites['character1'];
+    }
+   
+    loadScenarioSettings() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const scenarioNumber = urlParams.get('scenario') || '2';
+        console.log(`Carregando cenário ${scenarioNumber}`);
+    
+        switch (scenarioNumber) {
+            case '2': // cenário1
+                console.log('Configurando cenário 1');
+                this.sceneWidth = 2000;
+                this.sceneHeight = 1000;
+                this.tileMap = TileMap.loadScenario('1');
+                this.backgroundImage.src = './img/MAPA.png';
+                this.buttonPositions = [
+                    { id: 'button1', x: 280, y: 550 },
+                    { id: 'button2', x: 1535, y: 165 },
+                    { id: 'button3', x: 350, y: 840 },
+                    { id: 'button4', x: 1430, y: 690 },
+                    { id: 'button5', x: 1550, y: 556 },
+                    { id: 'button6', x: 1200, y: 370 },
+                    { id: 'button7', x: 570, y: 7000 },
+                    { id: 'button8', x: 740, y: 850 },
+                    { id: 'button9', x: 700, y: 370 },
+                ];
+                break;
+            case '3': // cenário2
+                console.log('Configurando cenário 2');
+                this.sceneWidth = 3000;
+                this.sceneHeight = 1500;
+                this.tileMap = TileMap.loadScenario('2');
+                this.backgroundImage.src = './img/lapa.jpg';
+                this.buttonPositions = [];
+                break;
+            default:
+                console.log('Configurando cenário padrão');
+                this.sceneWidth = 2000;
+                this.sceneHeight = 1000;
+                this.tileMap = TileMap.loadScenario();
+                this.backgroundImage.src = './img/MAPA1.png';
+                this.buttonPositions = [];
+                break;
+        }
+    
+        this.camera = new Camera(this.canvas.width, this.canvas.height, this.sceneWidth, this.sceneHeight);
+    }
+
+    initEvents() {
+        document.addEventListener('keydown', (event) => this.handleKeyDown(event));
+        document.addEventListener('keyup', () => this.handleKeyUp());
+        
+        document.getElementById('menuButton').addEventListener('click', () => this.navigateToMenu());
+       
+        // Eventos para seleção de personagem
+        document.querySelectorAll('.character-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const character = card.getAttribute('data-character');
+                this.changeCharacter(character);
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.scenario-button button').forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    const scenarioId = index + 2;
+                    navigateToScenario(scenarioId);
+                });
+            });
+        });
+        
+        function navigateToScenario(scenarioId) {
+            //console.log('Navegando para o cenário:', scenarioId);
+            window.location.href = `cenario${scenarioId}.html`;
+        }
+    }
+
+    handleKeyDown(event) {
+        const step = 11.5;
+        let newX = this.player.x;
+        let newY = this.player.y;
+
+        switch (event.key) {
+            case 'ArrowUp':
+                this.currentDirection = 'up';
+                newY -= step;
+                break;
+            case 'ArrowDown':
+                this.currentDirection = 'down';
+                newY += step;
+                break;
+            case 'ArrowLeft':
+                this.currentDirection = 'left';
+                newX -= step;
+                break;
+            case 'ArrowRight':
+                this.currentDirection = 'right';
+                newX += step;
+                break;
+            default:
+                return;
+        }
+
+        if (newY > 940) newY = 940;
+    
+        if (newX < 0 || newX > this.sceneWidth || newY < 0 || newY > this.sceneHeight)
+            return; // Evita movimentação fora dos limites do cenário
+
+        if (!this.tileMap.isColliding(newX, newY)) {
+            this.player.x = newX;
+            this.player.y = newY;
+            this.updateCamera();
+            this.drawScene();
+            this.updateButtonPositions();
+            this.savePlayerPosition();
+        }
+
+        setTimeout(() => {
+            this.isMoving = false;
+        }, 100); 
+    }
+
+    handleKeyUp() {
+        this.currentDirection = 'null'; //direção quando não se move
+        this.drawScene();
+    }
+
+    updateCamera() {
+        this.camera.update(this.player.x, this.player.y);
+    }
+
+    updateButtonPositions() {
+        this.buttonPositions.forEach((button) => {
+            const element = document.getElementById(button.id);
+            if (element) {
+                element.style.left = (button.x - this.camera.x) + 'px';
+                element.style.top = (button.y - this.camera.y) + 'px';
+            }
+        });
+    }
+
+    drawScene() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.context.drawImage(this.backgroundImage, -this.camera.x, -this.camera.y, this.sceneWidth, this.sceneHeight);
+    
+        const deltaTime = performance.now() - this.lastTime;
+        this.lastTime = performance.now();
+    
+        const sprite = this.characterSprites[this.currentDirection];
+    
+        if (sprite && this.currentDirection !== 'null') {
+            sprite.isAnimating = true;
+            sprite.update(deltaTime);
+            sprite.draw(this.context, this.player.x - this.camera.x, this.player.y - this.camera.y);
+        } else {
+            // Exibe o sprite parado se não houver movimento
+            const idleSprite = this.characterSprites['down'];
+            if (idleSprite) {
+                idleSprite.draw(this.context, this.player.x - this.camera.x, this.player.y - this.camera.y);
+            }
+        }
+    }
+    
+    savePlayerPosition() {
+        localStorage.setItem('playerX', this.player.x);
+        localStorage.setItem('playerY', this.player.y);
+    }
+
+    loadPlayerPosition() {
+        this.player.x = parseInt(localStorage.getItem('playerX')) || this.canvas.width / 2;
+        this.player.y = parseInt(localStorage.getItem('playerY')) || this.canvas.height / 2;
+    }
+    
+    changeCharacter(character) {
+        this.selectedCharacter = character;
+        localStorage.setItem('selectedCharacter', character); // Salva a seleção
+        this.loadPlayerSprites(); // Carrega os sprites do novo personagem
+        this.player = new Player(
+            this.canvas.width / 2,
+            this.canvas.height / 2,
+            this.characterSprites
+        );
+    }
+
+    gameLoop() {
+        this.drawScene();
+        requestAnimationFrame(() => this.gameLoop());
+    }
 
 
-let players = {};
-let camera = { x: 0, y: 0 };
-
-// Inicializa o socket
-const socket = io();
-
-// Funções
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    drawScene();
-}
-
-function drawPlayer(player, color) {
-    ctx.fillStyle = color;
-    ctx.fillRect(player.x - camera.x, player.y - camera.y, 50, 50);
-}
-
-function drawScene() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    updateCamera();
-    console.log('Drawing scene with players:', players);
-    for (let id in players) {
-        drawPlayer(players[id], id === socket.id ? 'blue' : 'green');
+    navigateToMenu() {
+        this.savePlayerPosition();
+        //console.log('Navegando para o menu...');
+        window.location.href = 'selecao.html'; 
     }
 }
 
-function updateCamera() {
-    const player = players[socket.id];
-    if (!player) return;
-
-    camera.x = player.x - canvas.width / 2 + 25;
-    camera.y = player.y - canvas.height / 2 + 25;
-}
-
-// Eventos de socket
-socket.on('currentPlayers', (currentPlayers) => {
-    players = currentPlayers;
-    console.log('Current players:', players);
-    drawScene();
-});
-
-socket.on('newPlayer', (newPlayer) => {
-    players[newPlayer.id] = { x: newPlayer.x, y: newPlayer.y };
-    console.log('New player connected:', newPlayer);
-    drawScene();
-});
-
-socket.on('playerDisconnected', (playerId) => {
-    delete players[playerId];
-    console.log('Player disconnected:', playerId);
-    drawScene();
-});
-
-socket.on('playerMoved', (playerData) => {
-    players[playerData.id].x = playerData.x;
-    players[playerData.id].y = playerData.y;
-    console.log('Player moved:', playerData);
-    drawScene();
-});
-
-// Evento de teclado para mover o jogador
-document.addEventListener('keydown', (event) => {
-    let player = players[socket.id];
-    if (!player) return;
-
-    const moveSpeed = 5;
-
-    // Cria variáveis para novas posições
-    let newX = player.x;
-    let newY = player.y;
-
-    switch (event.key) {
-        case 'ArrowUp':
-            newY += moveSpeed; // Move para cima
-            break;
-        case 'ArrowDown':
-            newY -= moveSpeed; // Move para baixo
-            break;
-        case 'ArrowLeft':
-            newX += moveSpeed; // Move para a esquerda
-            break;
-        case 'ArrowRight':
-            newX -= moveSpeed; // Move para a direita
-            break;
-    }
-
-    // Verifica limites para evitar que o jogador saia da tela
-    if (newX >= 0 && newX + 50 <= canvas.width) {
-        player.x = newX; // Atualiza a posição horizontal
-    }
-    if (newY >= 0 && newY + 48 <= canvas.height) {
-        player.y = newY; // Atualiza a posição vertical
-    }
-
-    console.log('Player movement:', player);
-    socket.emit('playerMovement', player);
-    drawScene();
-});
-
-// Eventos de chat
-sendButton.addEventListener('click', () => {
-    const message = chatInput.value;
-    if (message) {
-        socket.emit('chatMessage', message);
-        chatInput.value = '';
-    }
-});
-
-socket.on('chatMessage', (message) => {
-    const messageElement = document.createElement('div');
-    messageElement.textContent = message;
-    chatMessages.appendChild(messageElement);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-});
-
-// Inicializa o canvas
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
+const game = new Game();

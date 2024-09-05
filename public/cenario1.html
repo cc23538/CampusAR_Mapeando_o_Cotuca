@@ -1,36 +1,74 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://aframe.io https://raw.githack.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' https://aframe.io https://raw.githack.com; connect-src 'self' https://aframe.io https://raw.githack.com https://ar-js-org.github.io; child-src 'self' blob: data:;">
-  <title>Realidade Aumentada Cotuca</title>
-  <link rel="stylesheet" href="/CSS/cenario1.css">
-  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data:;">
+    <title>Tela Inicial do Jogo AR</title>
+   
+    <link rel="stylesheet" href="./css/canvas.css">
 </head>
 <body>
-  <div id="conteudoInicial">
-    <h1>Bem-vindo à Exploração Cotuca</h1>
-    <button id="iniciarRA">Iniciar RA</button>
-    <img id="background" src="/img/lapa.jpg" alt="Fundo">
-  </div>
-  <div id="conteudoAR" style="display: none;">
-    <button id="sairAR">Sair RA</button>
-    <a-scene embedded arjs>
-      <a-marker preset="hiro">
-        <a-box position="0 0.5 0" material="color: red;"></a-box>
-      </a-marker>
-      <a-entity camera></a-entity>
-    </a-scene>
-  </div>
-  <div class="balloon-icon">
-    <img src="./img/mensagem.png" alt="Informação">
-    <div class="balloon-text">
-      <p>Bem-vindo à escola Cotuca! Aqui você encontra os melhores cursos técnicos e uma infraestrutura de ponta.</p>
+    <div class="container">
+        <header>
+            <h1>Bem-vindo ao Campus AR</h1>
+            <button id="menuButton" onclick="navigateToMenu()">Menu</button>
+        </header>
+        <main>
+            <canvas id="gameCanvas"></canvas>
+            <div id="button1" class="scenario-button">
+                <button onclick="navigateToScenario(2)">
+                    <img src="./img/gif3.gif" alt="Ícone" class="button-icon">
+                </button>
+            </div>
+            <div id="button2" class="scenario-button">
+                <button onclick="navigateToScenario(3)">
+                    <img src="./img/gif3.gif" alt="Ícone" class="button-icon">
+                </button>
+            </div>
+            <div id="button3" class="scenario-button">
+                <button onclick="navigateToScenario(4)">
+                    <img src="./img/gif3.gif" alt="Ícone" class="button-icon">
+                </button>
+            </div>
+            <div id="button4" class="scenario-button">
+                <button onclick="navigateToScenario(5)">
+                    <img src="./img/gif3.gif" alt="Ícone" class="button-icon">
+                </button>
+            </div>
+            <div id="button5" class="scenario-button">
+                <button onclick="navigateToScenario(6)">
+                    <img src="./img/gif3.gif" alt="Ícone" class="button-icon">
+                </button>
+            </div>
+            <div id="button6" class="scenario-button">
+                <button onclick="navigateToScenario(7)">
+                    <img src="./img/gif3.gif" alt="Ícone" class="button-icon">
+                </button>
+            </div>
+            <div id="button7" class="scenario-button">
+                <button onclick="navigateToScenario(8)">
+                    <img src="./img/gif3.gif" alt="Ícone" class="button-icon">
+                </button>
+            </div>
+            <div id="button8" class="scenario-button">
+                <button onclick="navigateToScenario(9)">
+                    <img src="./img/gif3.gif" alt="Ícone" class="button-icon">
+                </button>
+            </div>
+            <div id="button9" class="scenario-button">
+                <button onclick="navigateToScenario(10)">
+                    <img src="./img/gif3.gif" alt="Ícone" class="button-icon">
+                </button>
+            </div>
+            
+        </main>
     </div>
-  </div>
-  <script src="/js/cenario1.js"></script>
-  
+    <script type="module" src="./js/Player.js"></script>
+    <script type="module" src="./js/Sprite.js"></script>
+    <script type="module" src="./js/Camera.js"></script>
+    <script type="module" src="./js/Main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
 </body>
 </html>
