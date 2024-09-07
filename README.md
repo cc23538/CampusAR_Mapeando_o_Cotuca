@@ -31,7 +31,7 @@ Siga as instruções abaixo para configurar o projeto localmente:
 
 1. Clone este repositório para a sua máquina local:
     ```sh
-    git clone https://github.com/cc23538/campus-ar-mapeando-o-cotuca.git
+    git clone https://github.com/cc23538/CampusAR-Mapeando-o-Cotuca.git
     ```
 
 2. Navegue até o diretório do projeto:

@@ -62,6 +62,23 @@ app.post('/login', (req, res) => {
   });
 });
 
+// Rota de cadastro
+app.post('/registrar', (req, res) => {
+  const { nome, usuario, email, senha } = req.body;
+
+  const cadastrarUsuarioQuery = 'INSERT INTO Usuarios (nome, usuario, email, senha) VALUES (?, ?, ?, ?)';
+  connection.query(cadastrarUsuarioQuery, [nome, usuario, email, senha], (err, resultado) => {
+    if (err) {
+      console.error('Erro ao cadastrar usuário:', err);
+      return res.status(500).json({ mensagem: 'Erro ao cadastrar usuário' });
+    }
+    console.log('Usuário cadastrado com sucesso!');
+    res.status(201).json({ mensagem: 'Usuário cadastrado com sucesso!' });
+  });
+});
+
+
+
 // Configuração do Socket.io
 io.on('connection', (socket) => {
   console.log('Usuário conectado:', socket.id);

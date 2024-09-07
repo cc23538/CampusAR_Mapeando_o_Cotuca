@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Função de registro (se ainda for necessária)
     registerForm.addEventListener('submit', async (event) => {
         event.preventDefault();
         const name = document.querySelector('#registerName').value;
@@ -63,6 +62,16 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Erro ao registrar:', error);
             alert('Ocorreu um erro ao registrar. Tente novamente.');
         }
+    });
+
+    switchToRegister.addEventListener('click', (event) => {
+        event.preventDefault();
+        toggleForms();
+    });
+
+    switchToLogin.addEventListener('click', (event) => {
+        event.preventDefault();
+        toggleForms();
     });
 
     function toggleForms() {
