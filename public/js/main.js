@@ -110,6 +110,8 @@ export class Game {
                 this.tileMap = TileMap.loadScenario('2');
                 this.backgroundImage.src = './img/lapa.jpg';
                 this.buttonPositions = [];
+
+                
                 break;
             default:
                 console.log('Configurando cenário padrão');

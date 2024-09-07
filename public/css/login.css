@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Evita rolagem se o conteúdo sair da tela */
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+}
+
+.form-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: absolute;
+    width: 100%;
+    transition: opacity 0.3s ease;
+    box-sizing: border-box; /* Inclui o padding no tamanho total */
+    text-align: center; /* Centraliza o conteúdo dentro do container */
+}
+
+.form-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px; /* Espaço entre a imagem e o formulário */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.message {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.message a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.message a:hover {
+    text-decoration: underline;
+}
+
+.login-container,
+.register-container {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.show {
+    opacity: 1;
+    visibility: visible;
+}

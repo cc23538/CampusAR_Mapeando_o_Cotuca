@@ -31,17 +31,19 @@ Siga as instruções abaixo para configurar o projeto localmente:
 
 1. Clone este repositório para a sua máquina local:
     ```sh
-    git clone https://github.com/seu-usuario/campus-ar-mapeando-o-cotuca.git
+    git clone https://github.com/cc23538/campus-ar-mapeando-o-cotuca.git
     ```
 
 2. Navegue até o diretório do projeto:
     ```sh
-    cd campus-ar-mapeando-o-cotuca
+    cd CampusAR-Mapeando-o-Cotuca
     ```
 
 3. Instale as dependências necessárias:
     ```sh
     npm install
+    npm install mysql2
+    npm install helmat
     ```
 
 4. Inicie o servidor:
