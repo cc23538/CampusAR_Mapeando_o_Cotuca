@@ -44,6 +44,8 @@ Siga as instruções abaixo para configurar o projeto localmente:
     npm install
     npm install mysql2
     npm install helmat
+    npm install express-session
+    npm intall bcrypt
     ```
 
 4. Inicie o servidor:
