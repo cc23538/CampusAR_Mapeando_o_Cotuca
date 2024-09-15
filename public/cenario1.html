@@ -4,23 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; img-src 'self' data:;">
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+      style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+      img-src 'self' data:;
+      connect-src 'self';
+      font-src 'self' https://cdn.jsdelivr.net;
+    ">
     <title>Tela Inicial do Jogo AR</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/canvas.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <style>
+        #character-info {
+            margin: 20px 0;
+            text-align: center;
+        }
+        #character-info img {
+            max-width: 100px;
+            height: auto;
+        }
+        .nickname {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <header></header>
         <main>
+            <div id="character-info">
+                <h2>Personagem Selecionado</h2>
+                <img id="selected-character-img" src="" alt="Personagem Selecionado">
+                <div class="nickname" id="nickname"></div>
+            </div>
+
             <canvas id="gameCanvas"></canvas>
             <div  id="menuButton">
-                <button onclick="navigateToMenu()">Seleção</button>
+                <!--<button onclick="navigateToMenu()">Seleção</button>-->
+                <button id="menuButtonElement">Seleção</button>
             </div>
             <div  id="Configuracoes" >
                 <button onclick=" ">Configurações</button>
             </div>
             <div id="button1" class="scenario-button">
-                <button onclick="navigateToScenario(2)">
+                <button id="button1Element">
+                <!--<button onclick="navigateToScenario(2)">-->
                     <img src="./img/gif3.gif" alt="Ícone" class="button-icon">
                 </button>
             </div>
@@ -71,7 +102,35 @@
     <script type="module" src="./js/Sprite.js"></script>
     <script type="module" src="./js/Camera.js"></script>
     <script type="module" src="./js/Main.js"></script>
+    <script src="./js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectedCharacterImg = document.getElementById('selected-character-img');
+            const nicknameElement = document.getElementById('nickname');
+            
+            // Recuperar os dados do localStorage
+            const selectedCharacter = localStorage.getItem('selectedCharacter');
+            const nickname = localStorage.getItem('nickname');
+
+            // Atualizar a imagem e o nome
+            if (selectedCharacter) {
+                const imgSrc = document.querySelector(`.character-card[data-character="${selectedCharacter}"] img`).src;
+                selectedCharacterImg.src = imgSrc;
+            }
+            if (nickname) {
+                nicknameElement.textContent = `Nickname: ${nickname}`;
+            }
+        });
+
+        function navigateToMenu() {
+            window.location.href = 'selecao.html';
+        }
+
+        function navigateToScenario(scenarioId) {
+            // Implementar navegação para o cenário específico
+            console.log(`Navegando para o cenário ${scenarioId}`);
+        }
+    </script>
 </body>
 </html>

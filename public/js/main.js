@@ -153,6 +153,18 @@ export class Game {
             //console.log('Navegando para o cenário:', scenarioId);
             window.location.href = `cenario${scenarioId}.html`;
         }
+        /* alterar depois
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('menuButtonElement').addEventListener('click', navigateToMenu);
+            document.getElementById('configuracoesButton').addEventListener('click', () => {
+                // Ação de configurações
+            });
+        
+            document.getElementById('button1Element').addEventListener('click', () => {
+                navigateToScenario(2);
+            });
+            // Repita para outros botões
+        });*/
     }
 
     handleKeyDown(event) {
