@@ -2,6 +2,7 @@ import { TileMap } from './TileMap.js';
 import { Sprite } from './Sprite.js';
 import { Camera } from './Camera.js';
 import { Player } from './Player.js';
+import  NPC  from './Npc.js';
 
 export class Game {
     constructor() {
@@ -21,6 +22,8 @@ export class Game {
         this.characterSprites = {};
         this.selectedCharacter = localStorage.getItem('selectedCharacter') || 'defaultCharacter';
 
+        this.npcs = [];
+
         this.setup();
         this.initEvents();
     }
@@ -33,13 +36,29 @@ export class Game {
             this.canvas.height / 2,
             this.characterSprites
         );
-    
+        
+        this.loadNPCs();
+
         this.loadPlayerPosition();
         this.backgroundImage.onload = () => {
             this.lastTime = performance.now();
             requestAnimationFrame(() => this.gameLoop());
         };
     }
+
+    async loadNPCs() {
+        // Limpe o array de NPCs se necessário
+        this.npcs = [];
+    
+        // Crie NPCs com base nas posições fixas
+        this.npcPositions.forEach(pos => {
+            this.npcs.push(new NPC(pos.x, pos.y, 50, 50, `./img/npc_${pos.id}.png`, pos.id));
+        });
+    
+        // Carregue os diálogos para todos os NPCs
+        await Promise.all(this.npcs.map(npc => npc.loadDialogues()));
+    }
+
     
     loadPlayerSprites() {
         const characterSprites = {
@@ -102,6 +121,10 @@ export class Game {
                     { id: 'button8', x: 740, y: 850 },
                     { id: 'button9', x: 700, y: 370 },
                 ];
+                this.npcPositions = [
+                    { id: 1, x: 500, y: 300 },
+                    { id: 2, x: 1500, y: 700 }
+                ];
                 break;
             case '3': // cenário2
                 console.log('Configurando cenário 2');
@@ -153,18 +176,7 @@ export class Game {
             //console.log('Navegando para o cenário:', scenarioId);
             window.location.href = `cenario${scenarioId}.html`;
         }
-        /* alterar depois
-        document.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('menuButtonElement').addEventListener('click', navigateToMenu);
-            document.getElementById('configuracoesButton').addEventListener('click', () => {
-                // Ação de configurações
-            });
         
-            document.getElementById('button1Element').addEventListener('click', () => {
-                navigateToScenario(2);
-            });
-            // Repita para outros botões
-        });*/
     }
 
     handleKeyDown(event) {
@@ -205,7 +217,10 @@ export class Game {
             this.drawScene();
             this.updateButtonPositions();
             this.savePlayerPosition();
+
+           
         }
+
 
         setTimeout(() => {
             this.isMoving = false;
@@ -222,11 +237,11 @@ export class Game {
     }
 
     updateButtonPositions() {
-        this.buttonPositions.forEach((button) => {
-            const element = document.getElementById(button.id);
-            if (element) {
-                element.style.left = (button.x - this.camera.x) + 'px';
-                element.style.top = (button.y - this.camera.y) + 'px';
+        this.buttonPositions.forEach(position => {
+            const button = document.getElementById(position.id);
+            if (button) {
+                button.style.left = `${position.x - this.camera.x}px`;
+                button.style.top = `${position.y - this.camera.y}px`;
             }
         });
     }
@@ -251,6 +266,10 @@ export class Game {
                 idleSprite.draw(this.context, this.player.x - this.camera.x, this.player.y - this.camera.y);
             }
         }
+        this.updateButtonPositions();
+
+        // Desenhe todos os NPCs
+        this.npcs.forEach(npc => npc.draw(this.context, this.canvas.width, this.canvas.height));
     }
     
     savePlayerPosition() {
@@ -265,8 +284,8 @@ export class Game {
     
     changeCharacter(character) {
         this.selectedCharacter = character;
-        localStorage.setItem('selectedCharacter', character); // Salva a seleção
-        this.loadPlayerSprites(); // Carrega os sprites do novo personagem
+        localStorage.setItem('selectedCharacter', character);
+        this.loadPlayerSprites();
         this.player = new Player(
             this.canvas.width / 2,
             this.canvas.height / 2,
@@ -278,6 +297,7 @@ export class Game {
         this.drawScene();
         requestAnimationFrame(() => this.gameLoop());
     }
+
 
 
     navigateToMenu() {

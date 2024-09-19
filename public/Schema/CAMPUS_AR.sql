@@ -6,6 +6,8 @@ CREATE SCHEMA CampusAR;
 
 USE CampusAR;
 
+
+
 CREATE TABLE IF NOT EXISTS Usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
@@ -16,6 +18,19 @@ CREATE TABLE IF NOT EXISTS Usuarios (
     INDEX (nome),
     INDEX (email),
     INDEX (usuario)
+);
+
+CREATE TABLE IF NOT EXISTS Jogadores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    localizacao_x INT NOT NULL,  -- Coordenada X no jogo
+    localizacao_y INT NOT NULL,  -- Coordenada Y no jogo
+    FOREIGN KEY (usuario_id) REFERENCES Usuarios(id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    INDEX (usuario_id),
+    INDEX (localizacao_x),
+    INDEX (localizacao_y)
 );
 
 CREATE TABLE IF NOT EXISTS Amizades (
@@ -53,6 +68,7 @@ CREATE TABLE IF NOT EXISTS Mensagens (
     INDEX (data_envio)
 );
 
+/*
 CREATE TABLE IF NOT EXISTS Chamadas_Video (
     id INT AUTO_INCREMENT PRIMARY KEY,
     iniciador_id INT,
@@ -68,7 +84,7 @@ CREATE TABLE IF NOT EXISTS Chamadas_Video (
     INDEX (iniciador_id),
     INDEX (participante_id),
     INDEX (data_inicio)
-);
+);*/
 
 CREATE TABLE IF NOT EXISTS NPCs (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -84,10 +100,10 @@ CREATE TABLE IF NOT EXISTS NPCs (
 );
 
 CREATE TABLE IF NOT EXISTS Dialogos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY,
     npc_id INT,
-    texto TEXT NOT NULL,
-    FOREIGN KEY (npc_id) REFERENCES NPCs(id)
+    dialogos TEXT,
+    FOREIGN KEY (npc_id) REFERENCES npcs(id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
     INDEX (npc_id)
