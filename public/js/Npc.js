@@ -7,11 +7,10 @@ export default class NPC {
         this.image = new Image();
         this.image.src = imageSrc;
         this.id = id;
-        this.dialogos = []; // Array para armazenar diálogos
+        this.dialogos = [];
     }
 
     draw(ctx) {
-        // Desenha o NPC com coordenadas absolutas
         const screenX = this.x;
         const screenY = this.y;
 
@@ -19,7 +18,7 @@ export default class NPC {
     }
 
     isClicked(mouseX, mouseY) {
-        // Verifica se a posição do mouse está dentro da área do NPC
+        
         return mouseX > this.x - this.width / 2 && mouseX < this.x + this.width / 2 &&
                mouseY > this.y - this.height / 2 && mouseY < this.y + this.height / 2;
     }
@@ -39,7 +38,7 @@ export default class NPC {
 
     showDialogue(index) {
         if (this.dialogos[index]) {
-            alert(this.dialogos[index]); // Exibe o diálogo em um alert
+            alert(this.dialogos[index]);
         }
     }
 }
